@@ -7,7 +7,7 @@ import SideBar from "@/components/sidebar/SideBar";
 import { AxiosPost } from "../../utils/api";
 import { useEffect, useState } from "react";
 import Select from "react-select";
-import { basech } from "../../utils/api";
+import { basecr, basech } from "../../utils/api";
 
 import Message from "@/components/alert";
 import DatePicker from "@/components/datepicker";
@@ -15,7 +15,9 @@ import axios from "axios";
 export default function CreeEmp() {
   const [message, setMessage] = useState("");
   const [date, setDateError] = useState(false);
+  const [datea, setdatea] = useState("");
   const [drivers, setDrivers] = useState([]);
+  const [imagelink, setimagelink] = useState("");
   useEffect(() => {
     axios
       .get(`${basech}/allch`)
@@ -53,16 +55,31 @@ export default function CreeEmp() {
       setDateError(true);
       console.log("date error");
     }
+
+    setdatea(e);
+    console.log("datea", datea);
   };
 
   const submit = async (data) => {
-    console.log(data);
-    return;
-    delete data.ltype.label;
-    data.ltype = data.ltype.value;
-    console.log(data);
+    let formdata = new FormData();
+    console.log(datea);
+    // Object.keys(data).forEach((key) => formdata.append(key, data[key]));
+    formdata.append("avatar", data.image[0]);
+    delete data.image;
+    data.datea = datea;
+    Object.keys(data).forEach((key) => {
+      if (typeof data[key] == "object") {
+        console.log(data[key]);
+        formdata.append(key, JSON.stringify(data[key]));
+      } else {
+        formdata.append(key, data[key]);
+      }
+    });
+
+    // formdata.append("lch", JSON.stringify(data.lch));
+
     setMessage("");
-    let { data: d } = await AxiosPost(`${basech}/add`, data);
+    let { data: d } = await AxiosPost(`${basecr}/add`, formdata);
     if (d.status == "ok") {
       setMessage(d.message);
       reset();
@@ -134,7 +151,13 @@ export default function CreeEmp() {
             {/** */}
             <Form.Group controlId="formFile" className="mb-3">
               <Form.Label>Default file input example</Form.Label>
-              <Form.Control type="file" />
+              <Form.Control
+                type="file"
+                {...register("image", { required: true })}
+                onChange={(e) => console.log(e.target.files.length)}
+              />
+              {errors.image && <p> ⚠ Le N° Serie Est Obligatoire.</p>}
+              <img src={imagelink}></img>
             </Form.Group>
             {/** */}
 
