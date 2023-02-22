@@ -19,7 +19,7 @@ export default function CreeEmp() {
   const [drivers, setDrivers] = useState([]);
   const [imagelink, setimagelink] = useState("");
   useEffect(() => {
-    axios
+    /*axios
       .get(`${basech}/allch`)
       .then((response) => {
         const result = response.data;
@@ -37,7 +37,7 @@ export default function CreeEmp() {
       })
       .catch((err) => {
         console.log(err);
-      });
+      });*/
   }, []);
   const {
     register,
@@ -115,7 +115,7 @@ export default function CreeEmp() {
                 {date && <p> ⚠ date Est Obligatoire.</p>}
               </div>
 
-              <div className="col">
+              {/**  <div className="col">
                 <Form.Label className="fs-5">Liste Chauffeur</Form.Label>
                 <Controller
                   {...register("lch", { required: true })}
@@ -127,7 +127,7 @@ export default function CreeEmp() {
                   defaultValue=""
                 />
                 {errors.lch && <p> ⚠ La License Type Est Obligatoire.</p>}
-              </div>
+              </div>*/}
             </div>
 
             {/** */}

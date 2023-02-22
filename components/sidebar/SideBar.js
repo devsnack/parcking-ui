@@ -25,6 +25,8 @@ import FolderSharedIcon from "@mui/icons-material/FolderShared";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Collapse from "@mui/material/Collapse";
+import AirlineSeatReclineNormalIcon from "@mui/icons-material/AirlineSeatReclineNormal";
+import TimeToLeaveIcon from "@mui/icons-material/TimeToLeave";
 
 const drawerWidth = 240;
 
@@ -80,6 +82,7 @@ export default function SidebarMenu({ children }) {
   const [open, setOpen] = React.useState(true);
   const [subMenu, setSubMenu] = React.useState(false);
   const [subMenuEMP, setSubMenuEMP] = React.useState(false);
+  const [subMenuV, setSubMenuV] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -143,7 +146,7 @@ export default function SidebarMenu({ children }) {
           </ListItem>
           <Collapse in={subMenuEMP} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <CLink href="/vehicule" style={{ color: "inherit" }}>
+              <CLink href="/employee/cree" style={{ color: "inherit" }}>
                 <ListItemButton sx={{ pl: 4 }}>
                   <ListItemIcon>
                     {" "}
@@ -152,7 +155,7 @@ export default function SidebarMenu({ children }) {
                   <ListItemText primary="Ajouter Employee" />
                 </ListItemButton>
               </CLink>
-              <CLink href="/" style={{ color: "inherit" }}>
+              <CLink href="/employee/details" style={{ color: "inherit" }}>
                 <ListItemButton sx={{ pl: 4 }}>
                   <ListItemIcon>
                     <FolderSharedIcon></FolderSharedIcon>
@@ -167,27 +170,57 @@ export default function SidebarMenu({ children }) {
         <List>
           <ListItemButton onClick={() => setSubMenu(!subMenu)}>
             <ListItemIcon>
-              <InboxIcon />
+              <AirlineSeatReclineNormalIcon></AirlineSeatReclineNormalIcon>
             </ListItemIcon>
-            <ListItemText primary="Inbox" />
+            <ListItemText primary="Chauffeur" />
             {subMenu ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
           <Collapse in={subMenu} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <CLink href="/vehicule">
+              <CLink href="/chauffeur/cree">
                 <ListItemButton sx={{ pl: 4 }}>
                   <ListItemIcon>
-                    <InboxIcon />
+                    <PersonAddIcon></PersonAddIcon>
                   </ListItemIcon>
-                  <ListItemText primary="Starred" />
+                  <ListItemText primary="Ajouter  Chauffeur" />
                 </ListItemButton>
               </CLink>
-              <CLink href="/" style={{ color: "inherit" }}>
+              <CLink href="/chauffeur/details" style={{ color: "inherit" }}>
                 <ListItemButton sx={{ pl: 4 }}>
                   <ListItemIcon>
-                    <InboxIcon />
+                    <FolderSharedIcon />
                   </ListItemIcon>
-                  <ListItemText primary="BackHome" />
+                  <ListItemText primary="Details chauffeur" />
+                </ListItemButton>
+              </CLink>
+            </List>
+          </Collapse>
+        </List>
+        {/** ADD VEHICULE */}
+        <List>
+          <ListItemButton onClick={() => setSubMenuV(!subMenuV)}>
+            <ListItemIcon>
+              <TimeToLeaveIcon></TimeToLeaveIcon>
+            </ListItemIcon>
+            <ListItemText primary="Vehicule" />
+            {subMenuV ? <ExpandLess /> : <ExpandMore />}
+          </ListItemButton>
+          <Collapse in={subMenuV} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <CLink href="/vehicule/cree">
+                <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemIcon>
+                    <TimeToLeaveIcon></TimeToLeaveIcon>
+                  </ListItemIcon>
+                  <ListItemText primary="Ajouter Vehicule" />
+                </ListItemButton>
+              </CLink>
+              <CLink href="/vehicule/details" style={{ color: "inherit" }}>
+                <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemIcon>
+                    <TimeToLeaveIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Details Vehicule" />
                 </ListItemButton>
               </CLink>
             </List>

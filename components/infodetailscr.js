@@ -83,25 +83,7 @@ export default function InfoDetails() {
         console.log(err);
       });
   };
-  const handleSubmite = () => {
-    const url = "http://localhost:8000/employee";
-    const Credentials = { name, email, number, nic, address };
-    axios
-      .post(url, Credentials)
-      .then((response) => {
-        const result = response.data;
-        const { status, message, data } = result;
-        if (status !== "ok") {
-          alert(message, status);
-        } else {
-          alert(message);
-          window.location.reload();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+
   const handleEdit = () => {
     setupdateerror(false);
     console.log(ltype);
@@ -164,10 +146,10 @@ export default function InfoDetails() {
             <thead>
               <tr>
                 <th></th>
-                <th>Nom Complet</th>
-                <th>NID</th>
-                <th>Numéro de Licence</th>
-                <th>License Type</th>
+                <th>Nom Vehicule</th>
+                <th>Matricule</th>
+                <th>N° Serie</th>
+                <th>Date D'acquisition</th>
               </tr>
             </thead>
             <tbody>
@@ -185,8 +167,8 @@ export default function InfoDetails() {
                   </td>
                   <td>{item.vname.toUpperCase()}</td>
                   <td>{item.immat}</td>
-                  <td>{item.lch.label}</td>
-                  <td>{item.compteur}</td>
+
+                  <td>{item.nserie}</td>
                   <td>{item.datea}</td>
 
                   <td style={{ minWidth: 190 }}>
